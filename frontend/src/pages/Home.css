@@ -35,7 +35,18 @@
   border-bottom: 1px solid rgba(160, 32, 240, 0.2);
 }
 
-/* Updated navigation link styles with a white hover effect */
+.nav-logo {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+}
+
 .nav-link {
   color: #ccc;
   transition: all 0.3s ease-in-out;
@@ -51,28 +62,16 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.8); /* Changed to a semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.8);
   transition: width 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  color: white; /* Changed hover text color to match */
+  color: white;
 }
 
 .nav-link:hover::after {
   width: 100%;
-}
-
-.nav-logo {
-  font-family: 'Segoe UI', sans-serif;
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: white;
-  transition: all 0.3s ease;
-}
-
-.nav-logo:hover {
-  transform: scale(1.05);
 }
 
 .funky-font-title {
@@ -84,11 +83,12 @@
   text-shadow: 1px 1px 5px rgba(160, 32, 240, 0.5);
 }
 
+/* Increased padding and font sizes for the feature card */
 .feature-card {
   background: linear-gradient(to bottom right, #271348, #44298a);
   border-radius: 1rem;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
+  padding: 2rem; /* Increased padding */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -102,12 +102,12 @@
 
 .feature-card-title {
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.6rem; /* Increased font size */
   margin-bottom: 0.5rem;
 }
 
 .feature-card-description {
-  font-size: 0.95rem;
+  font-size: 1rem; /* Increased font size */
   color: #ccc;
   margin-bottom: 1rem;
 }

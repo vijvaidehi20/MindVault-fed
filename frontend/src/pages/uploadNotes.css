@@ -1,18 +1,20 @@
+/* uploadNotes.css */
 @import url('https://fonts.googleapis.com/css2?family=Ink+Free&display=swap');
 
-body,
-html,
+/* Main container theme to match the homepage's background gradient */
 .get-started-container {
-  background-color: #201f1f;
-  height: 100vh;
+  background: linear-gradient(to bottom, #11081a, #0b0510);
+  min-height: 100vh;
   width: 100vw;
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
   color: white;
   overflow-x: hidden;
+  padding-top: 70px; /* Space for the fixed navbar */
 }
 
+/* This font is consistent with the funky titles on the homepage */
 .funky-font {
   font-family: 'Ink Free', cursive;
   font-weight: bold;
@@ -24,6 +26,8 @@ html,
   font-weight: bold;
   font-size: 2rem;
   text-align: center;
+  text-shadow: 1px 1px 5px rgba(160, 32, 240, 0.5);
+  margin-top: 1rem;
 }
 
 .slider-container {
@@ -126,7 +130,7 @@ html,
   }
 }
 
-/* This is the base style for all purple buttons */
+/* Updated button style for consistency with primary-btn on homepage */
 .select-files-btn {
   background-color: #9333ea;
   color: white;
@@ -134,22 +138,27 @@ html,
   font-size: 1.1rem;
   font-weight: bold;
   border-radius: 0.75rem;
-  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
   border: none;
-  /* Make buttons display inline-block for proper spacing */
   display: inline-block;
-  text-decoration: none; /* For the label element */
-  margin: 0 0.5rem; /* Add some margin between buttons */
+  text-decoration: none;
+  margin: 0 0.5rem;
 }
 
 .select-files-btn:hover,
 .select-files-btn:focus {
   transform: scale(1.08);
-  background: linear-gradient(to bottom right, #271348, #44298a);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.5);
 }
 
-/* Hide the native file input */
+.select-files-btn:active {
+  background: #1a1a1a;
+  transform: scale(0.95);
+}
+
 .hidden-file-input {
   display: none;
 }
@@ -182,8 +191,8 @@ html,
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Darker, more intense blur */
-  backdrop-filter: blur(8px); /* Increased blur effect */
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,15 +202,15 @@ html,
 
 .popup-content {
   background-color: #292929;
-  padding: 3rem 2.5rem; /* Increased padding */
-  border-radius: 1.5rem; /* More rounded corners */
+  padding: 3rem 2.5rem;
+  border-radius: 1.5rem;
   text-align: center;
   position: relative;
   width: 90%;
-  max-width: 500px; /* Slightly wider */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(160, 32, 240, 0.3); /* Softer, glowing shadow */
-  animation: fadeInScale 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bounce-like animation */
-  border: 1px solid rgba(160, 32, 240, 0.2); /* Subtle purple border */
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(160, 32, 240, 0.3);
+  animation: fadeInScale 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  border: 1px solid rgba(160, 32, 240, 0.2);
 }
 
 .popup-close-btn {
@@ -211,42 +220,42 @@ html,
   background: none;
   border: none;
   color: #a020f0;
-  font-size: 2.2rem; /* Larger close button */
+  font-size: 2.2rem;
   cursor: pointer;
   line-height: 1;
   transition: transform 0.2s ease-in-out;
 }
 
 .popup-close-btn:hover {
-  transform: rotate(90deg); /* Rotate on hover */
+  transform: rotate(90deg);
 }
 .popup-close-btn:focus {
-  outline: none; /* This removes the default focus outline */
-  box-shadow: none; /* This is a good practice to ensure no custom shadow appears */
+  outline: none;
+  box-shadow: none;
 }
 
 .popup-title {
-  font-family: 'Ink Free', cursive; /* Use the funky font */
-  font-size: 2rem; /* Larger title */
+  font-family: 'Ink Free', cursive;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #a020f0, #ff69b4); /* Gradient text color */
+  background: linear-gradient(to right, #a020f0, #ff69b4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 5px rgba(160, 32, 240, 0.5); /* Glowing text effect */
+  text-shadow: 1px 1px 5px rgba(160, 32, 240, 0.5);
 }
 
 .popup-message {
-  font-size: 1.1rem; /* Slightly larger font */
+  font-size: 1.1rem;
   color: #ccc;
-  margin-bottom: 2rem; /* More space below the message */
+  margin-bottom: 2rem;
   line-height: 1.5;
 }
 
 .popup-actions {
   display: flex;
   justify-content: center;
-  gap: 0.5rem; /* More space between buttons */
+  gap: 0.5rem;
 }
 
 .uploaded-buttons {
@@ -265,7 +274,7 @@ html,
 /* New styles for the container after file upload */
 .uploaded-file-info {
   background-color: #292929;
-  border: 2px dashed #a020f0; /* Use a transparent border to maintain layout */
+  border: 2px dashed #a020f0;
   padding: 3.5rem;
   width: 700px;
   min-height: 300px;
@@ -303,3 +312,28 @@ html,
   }
 }
 
+.glow-border {
+  position: relative;
+  transition: border 0.3s ease;
+}
+
+.glow-border:hover {
+  border-color: #00ffff;
+  box-shadow: 0 0 10px #00ffff55, 0 0 20px #00ffff33;
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 4px #a259ff55, 0 0 8px #a259ff33;
+  }
+  50% {
+    box-shadow: 0 0 8px #a259ffaa, 0 0 16px #a259ff66;
+  }
+  100% {
+    box-shadow: 0 0 4px #a259ff55, 0 0 8px #a259ff33;
+  }
+}
+
+.glow-border:hover {
+  animation: borderGlow 2s ease-in-out infinite;
+}

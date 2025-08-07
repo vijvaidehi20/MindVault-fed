@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Added Link from react-router-dom
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import './uploadNotes.css';
+import './Home.css';
 
 const GetStarted = () => {
     const navigate = useNavigate();
@@ -10,21 +12,14 @@ const GetStarted = () => {
     const sliderBarRef = useRef<HTMLDivElement>(null);
     const tabs = ['PDF', 'PowerPoint', 'Image', 'Text'];
 
-    // State for file uploads and processing
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [isFileUploaded, setIsFileUploaded] = useState(false);
-    // const [uploadedFileId, setUploadedFileId] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
     const [summary, setSummary] = useState('');
     const [error, setError] = useState('');
     const [isMindMapPopupOpen, setIsMindMapPopupOpen] = useState(false);
 
-    /**
-     * Handles the file upload to the backend.
-     * This function is now called by handleSummaryClick.
-     */
     const uploadFileToBackend = async (file: File) => {
-        // Clear previous state before starting the upload
         setError('');
         setSummary('');
 
@@ -43,22 +38,17 @@ const GetStarted = () => {
             }
 
             const data = await response.json();
-            // setUploadedFileId(data.fileId); // Set the file ID upon successful upload
-            return data.fileId; // Return the fileId for immediate use
+            return data.fileId;
         } catch (err: unknown) {
             let errorMessage = 'An unknown error occurred during file upload.';
             if (err instanceof Error) {
                 errorMessage = err.message;
             }
             setError(errorMessage);
-            // Re-throw the error to stop the subsequent summary process
             throw new Error(errorMessage);
         }
     };
 
-    /**
-     * Handles a user selecting a file from the file input.
-     */
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
@@ -69,9 +59,6 @@ const GetStarted = () => {
         }
     };
 
-    /**
-     * This function now handles both uploading the file and requesting the summary.
-     */
     const handleSummaryClick = async () => {
         if (!uploadedFile) {
             setError('Please upload a file first.');
@@ -83,10 +70,8 @@ const GetStarted = () => {
         setSummary('');
 
         try {
-            // Step 1: Upload the file and get the file ID
             const fileId = await uploadFileToBackend(uploadedFile);
 
-            // Step 2: Use the returned file ID to get the summary
             const response = await fetch(`http://localhost:5000/api/summarize/${fileId}`, {
                 method: 'GET',
             });
@@ -109,8 +94,6 @@ const GetStarted = () => {
             setIsLoading(false);
         }
     };
-    
-    // ... (rest of your component functions)
 
     const handleMindMapClick = () => {
         setIsMindMapPopupOpen(true);
@@ -120,7 +103,6 @@ const GetStarted = () => {
         setIsMindMapPopupOpen(false);
     };
 
-    // useEffect hook for managing the slider bar position
     useEffect(() => {
         if (sliderBarRef.current) {
             const activeTabElement = sliderBarRef.current.querySelector('.file-type.active');
@@ -135,21 +117,57 @@ const GetStarted = () => {
 
     return (
         <div className="get-started-container">
-            {/* Top Nav */}
-            <div className="p-4 flex justify-between items-center border-b border-gray-700">
-                <Link to="/" className="text-2xl font-bold text-white cursor-pointer">
-                    MindVault
-                </Link>
-                <div className="flex gap-6 text-sm text-gray-300">
-                    <button className="text-white text-lg hover:text-white" onClick={() => navigate('/login')}>
-                        Login
-                    </button>
-                    <button className="bg-purple-500 hover:bg-purple-600 text-white py-1 px-3 rounded-full" onClick={() => navigate('/signup')}>
-                        Get Started
-                    </button>
-                </div>
-            </div>
+            {/* Top Nav - Replaced with the Home page's navbar */}
+            <nav className="nav-bar fixed w-full top-0 z-50">
+                <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-3">
+                    <RouterLink
+                        to="/"
+                        className="nav-logo cursor-pointer transition whitespace-nowrap"
+                    >
+                        MindVault
+                    </RouterLink>
 
+                    {/* All navigation tabs from Home page are now included */}
+                    <div className="hidden md:flex space-x-8 text-lg font-medium">
+                        {['home', 'explore', 'howItWorks', 'about'].map((section) => {
+                            if (section === 'home') {
+                                return (
+                                    <RouterLink
+                                        key={section}
+                                        to="/"
+                                        className="nav-link cursor-pointer transition-colors capitalize"
+                                    >
+                                        Home
+                                    </RouterLink>
+                                );
+                            }
+                            return (
+                                <ScrollLink
+                                    key={section}
+                                    to={section}
+                                    smooth={true}
+                                    duration={500}
+                                    offset={-70}
+                                    className="nav-link cursor-pointer transition-colors capitalize"
+                                >
+                                    {section.replace(/([A-Z])/g, ' $1')}
+                                </ScrollLink>
+                            );
+                        })}
+                    </div>
+
+                    <div className="flex space-x-4">
+                        <button className="glow-btn" onClick={() => navigate('/login')}>
+                            Login
+                        </button>
+                        <button className="primary-btn" onClick={() => navigate('/signup')}>
+                            Get Started
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            {/* Content starts below the fixed navbar */}
             <h1 className="supported-types mt-10 text-3xl">Supported File Types</h1>
             <div className="slider-container">
                 <div
@@ -230,7 +248,6 @@ const GetStarted = () => {
                         <label htmlFor="file-upload" className="select-files-btn">
                             Select Files
                         </label>
-                        {/* <p className="text-sm text-gray-400 mt-2">Or, upload from Google Drive</p> */}
                         <img src="/getStartedimg.png" alt="mascot" className="mascot-glow mascot-overlap" />
                     </div>
                 )}
