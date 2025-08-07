@@ -1,12 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
-import GetStarted from './pages/GetStarted';
+import UploadNotesPage from './pages/uploadNotes';
+import LoginPage from './pages/login';
+import SignupPage from './pages/signup';
 
 function App() {
   return (
     <Routes>
-       <Route path="/" element={<Home />} />
-      <Route path="/get-started" element={<GetStarted />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/upload-notes" element={<UploadNotesPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
     </Routes>
   );
 }

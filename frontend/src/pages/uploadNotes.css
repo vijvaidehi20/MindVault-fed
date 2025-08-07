@@ -303,28 +303,3 @@ html,
   }
 }
 
-.glow-border {
-  position: relative;
-  transition: border 0.3s ease;
-}
-
-.glow-border:hover {
-  border-color: #00ffff;
-  box-shadow: 0 0 10px #00ffff55, 0 0 20px #00ffff33;
-}
-
-@keyframes borderGlow {
-  0% {
-    box-shadow: 0 0 4px #a259ff55, 0 0 8px #a259ff33;
-  }
-  50% {
-    box-shadow: 0 0 8px #a259ffaa, 0 0 16px #a259ff66;
-  }
-  100% {
-    box-shadow: 0 0 4px #a259ff55, 0 0 8px #a259ff33;
-  }
-}
-
-.glow-border:hover {
-  animation: borderGlow 2s ease-in-out infinite;
-}
