@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-scroll';
-import { useNavigate } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll'; // Renamed react-scroll Link
+import { Link as RouterLink, useNavigate } from 'react-router-dom'; // Imported Router Link
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -38,20 +38,18 @@ const Home: React.FC = () => {
       {/* NAVBAR */}
       <nav className="nav-bar fixed w-full top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-3">
-          {/* Left: MindVault Logo */}
-          <Link
-            to="home"
-            smooth={true}
-            duration={500}
+          {/* Left: MindVault Logo - now a RouterLink */}
+          <RouterLink
+            to="/"
             className="nav-logo cursor-pointer transition whitespace-nowrap"
           >
             MindVault
-          </Link>
+          </RouterLink>
 
-          {/* Center: Navigation Tabs */}
+          {/* Center: Navigation Tabs - still using ScrollLink */}
           <div className="hidden md:flex space-x-8 text-lg font-medium">
             {['home', 'explore', 'howItWorks', 'about'].map((section) => (
-              <Link
+              <ScrollLink
                 key={section}
                 to={section}
                 smooth={true}
@@ -60,7 +58,7 @@ const Home: React.FC = () => {
                 className="nav-link cursor-pointer transition-colors capitalize"
               >
                 {section.replace(/([A-Z])/g, ' $1')}
-              </Link>
+              </ScrollLink>
             ))}
           </div>
 

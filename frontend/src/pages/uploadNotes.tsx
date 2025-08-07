@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Added Link from react-router-dom
 import './uploadNotes.css';
 
 const GetStarted = () => {
@@ -137,7 +137,9 @@ const GetStarted = () => {
         <div className="get-started-container">
             {/* Top Nav */}
             <div className="p-4 flex justify-between items-center border-b border-gray-700">
-                <div className="text-2xl font-bold text-white">MindVault</div>
+                <Link to="/" className="text-2xl font-bold text-white cursor-pointer">
+                    MindVault
+                </Link>
                 <div className="flex gap-6 text-sm text-gray-300">
                     <button className="text-white text-lg hover:text-white" onClick={() => navigate('/login')}>
                         Login

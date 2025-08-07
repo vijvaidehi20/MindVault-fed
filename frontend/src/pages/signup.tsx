@@ -11,7 +11,7 @@ export default function SignupPage() {
   };
   
   const handleClose = () => {
-    navigate('/upload-notes'); // Redirect to upload notes page after signup
+    navigate('/'); // Redirect to home page after signup
   };
 
   return (
