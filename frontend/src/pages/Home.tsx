@@ -17,6 +17,10 @@ const Home: React.FC = () => {
   const handleUploadNotesClick = () => {
     navigate('/upload-notes');
   };
+  
+  const handleAboutClick = () => {
+    navigate('/about');
+  };
 
   const FeatureCard = ({ icon, title, description, buttonText, onClick }: { icon: string, title: string, description: string, buttonText?: string, onClick?: () => void }) => (
     <div className="feature-card flex-1 min-w-0">
@@ -57,6 +61,17 @@ const Home: React.FC = () => {
                     className="nav-link cursor-pointer transition-colors capitalize"
                   >
                     Home
+                  </RouterLink>
+                );
+              }
+              if (section === 'about') {
+                return (
+                  <RouterLink
+                    key={section}
+                    to="/about"
+                    className="nav-link cursor-pointer transition-colors capitalize"
+                  >
+                    About
                   </RouterLink>
                 );
               }
@@ -140,13 +155,14 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Placeholder sections: HIDDEN for now */}
+      {/* Placeholder sections, removed about page content */}
       <section id="howItWorks" className="hidden min-h-screen px-8 py-16">
         <h2 className="text-4xl font-bold mb-6">How It Works</h2>
       </section>
 
-      <section id="about" className="hidden min-h-screen px-8 py-16">
-        <h2 className="text-4xl font-bold mb-6">About</h2>
+      {/* The About section content is now in a separate AboutPage component */}
+      <section id="about" className="hidden">
+        {/* Placeholder for About section, now a separate page */}
       </section>
 
       {/* FOOTER */}
