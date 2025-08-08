@@ -129,7 +129,7 @@ const GetStarted = () => {
 
                     {/* All navigation tabs from Home page are now included */}
                     <div className="hidden md:flex space-x-8 text-lg font-medium">
-                        {['home', 'explore', 'howItWorks', 'about'].map((section) => {
+                        {['home', 'explore', 'dashboard', 'about'].map((section) => {
                             if (section === 'home') {
                                 return (
                                     <RouterLink
@@ -138,6 +138,17 @@ const GetStarted = () => {
                                         className="nav-link cursor-pointer transition-colors capitalize"
                                     >
                                         Home
+                                    </RouterLink>
+                                );
+                            }
+                            if (section === 'dashboard') {
+                                return (
+                                    <RouterLink
+                                        key={section}
+                                        to="/dashboard"
+                                        className="nav-link cursor-pointer transition-colors capitalize"
+                                    >
+                                        Dashboard
                                     </RouterLink>
                                 );
                             }

@@ -184,7 +184,7 @@
 
 import React from 'react';
 import { scroller } from 'react-scroll';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -266,16 +266,16 @@ const Home: React.FC = () => {
             </a>
             <a
               className="nav-link cursor-pointer transition-colors capitalize"
-              onClick={() => handleScrollTo('howItWorks')}
+              onClick={() => navigate('/dashboard')}
             >
-              How It Works
+              Dashboard
             </a>
-            <a
+            <RouterLink
+              to="/about"
               className="nav-link cursor-pointer transition-colors capitalize"
-              onClick={() => handleScrollTo('about')}
             >
               About
-            </a>
+            </RouterLink>
           </div>
 
           {/* Right: Buttons */}
@@ -351,18 +351,6 @@ const Home: React.FC = () => {
             onClick={handleLoginClick}
           />
         </div>
-      </section>
-      
-      {/* HOW IT WORKS SECTION */}
-      <section id="howItWorks" className="min-h-screen px-8 py-16 flex flex-col items-center justify-center bg-[#180a24]">
-        <h2 className="text-4xl font-bold mb-6 text-center funky-font-title">How It Works</h2>
-        {/* Add content for this section here */}
-      </section>
-
-      {/* ABOUT SECTION */}
-      <section id="about" className="min-h-screen px-8 py-16 flex flex-col items-center justify-center bg-[#0d0512]">
-        <h2 className="text-4xl font-bold mb-6 text-center funky-font-title">About MindVault</h2>
-        {/* Add content for this section here */}
       </section>
 
       {/* FOOTER */}

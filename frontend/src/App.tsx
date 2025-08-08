@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import UploadNotesPage from './pages/uploadNotes';
 import LoginPage from './pages/login';
 import SignupPage from './pages/signup';
-import AboutPage from './pages/about'; 
+import AboutPage from './pages/About'; 
 
 function App() {
   return (
