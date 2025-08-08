@@ -1,117 +1,107 @@
-import React from 'react';
-import './about.css';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll'; // Added ScrollLink import
-import './Home.css'; // Importing Home.css for navbar styles
+import React, { useEffect, useRef } from 'react';
+import { Element } from 'react-scroll';
+import './Home.css';
 
-const AboutPage: React.FC = () => {
-  const navigate = useNavigate();
+const About: React.FC = () => {
+  const aboutRef = useRef<HTMLDivElement | null>(null);
 
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-section');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-  const handleGetStartedClick = () => {
-    navigate('/signup');
-  };
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <div className="about-page-container">
-      {/* Replaced simple navbar with the full, styled navbar from Home page */}
-      <nav className="nav-bar fixed w-full top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-3">
-          {/* Left: MindVault Logo */}
-          <RouterLink
-            to="/"
-            className="nav-logo cursor-pointer transition whitespace-nowrap"
-          >
-            MindVault
-          </RouterLink>
-
-          {/* Center: Navigation Tabs */}
-          <div className="hidden md:flex space-x-8 text-lg font-medium">
-            {['home', 'explore', 'howItWorks', 'about'].map((section) => {
-              if (section === 'home') {
-                return (
-                  <RouterLink
-                    key={section}
-                    to="/"
-                    className="nav-link cursor-pointer transition-colors capitalize"
-                  >
-                    Home
-                  </RouterLink>
-                );
-              }
-              if (section === 'about') {
-                return (
-                  <RouterLink
-                    key={section}
-                    to="/about"
-                    className="nav-link cursor-pointer transition-colors capitalize"
-                  >
-                    About
-                  </RouterLink>
-                );
-              }
-              return (
-                <ScrollLink
-                  key={section}
-                  to={section}
-                  smooth={true}
-                  duration={500}
-                  offset={-70}
-                  className="nav-link cursor-pointer transition-colors capitalize"
-                >
-                  {section.replace(/([A-Z])/g, ' $1')}
-                </ScrollLink>
-              );
-            })}
-          </div>
-
-          {/* Right: Buttons */}
-          <div className="flex space-x-4">
-            <button className="glow-btn" onClick={handleLoginClick}>
-              Login
-            </button>
-            <button className="primary-btn" onClick={handleGetStartedClick}>
-              Get Started
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      <section id="about" className="py-16">
-        <div className="about-content">
-          <h2 className="funky-font-title mb-8 text-center">About MindVault</h2>
-          <p className="about-paragraph">
-            MindVault is an AI-powered centralized workspace designed to address the challenges students face in managing and understanding a large volume of educational resources, from notes and PDFs to lecture recordings and tutorials. Existing tools are often fragmented, lacking seamless AI integration and personalized learning features.
+    <Element name="about" className="element">
+      <section
+        id="about"
+        ref={aboutRef}
+        className="min-h-screen px-8 py-16 flex flex-col items-center justify-center bg-[#0d0512] fade-in-section"
+      >
+        <h2 className="text-4xl font-bold mb-6 text-center funky-font-title">About MindVault</h2>
+        <div className="max-w-4xl text-center text-lg leading-relaxed text-gray-300">
+          <p className="mb-6">
+            MindVault is an AI-powered centralized workspace designed to address the challenges students face in managing and understanding a large volume of educational resources—from notes and PDFs to lecture recordings and tutorials. Traditional tools are often fragmented, lacking seamless AI integration and personalized learning features. MindVault solves this by providing a unified, intelligent platform.
           </p>
-          <p className="about-paragraph">
+          <p className="mb-6">
             Our platform turns passive content into active learning tools by offering a unified space for note-taking, Q&A, and summarization. It uses Retrieval-Augmented Generation (RAG) to provide personalized answers based on a student's own materials and can convert static content into dynamic visual representations like mind maps. The system is built on a robust tech stack, including React.js for the frontend, Node.js and Express for the backend, and MongoDB for data storage. It integrates with LangChain and OpenAI for its core AI capabilities.
           </p>
-          <h3 className="text-2xl font-bold mb-4 text-center">Future Scope</h3>
-          <ul className="about-list">
-            <li className="about-list-item">Voice note transcription</li>
-            <li className="about-list-item">Chat history</li>
-            <li className="about-list-item">Collaborative study features</li>
-            <li className="about-list-item">AI-powered calendar planning</li>
+        </div>
+
+        <h3 className="text-3xl font-bold mt-16 mb-8 text-center funky-font-title">Our Features</h3>
+        <div className="max-w-4xl text-left text-lg leading-relaxed text-gray-300">
+          <ul className="list-none space-y-8">
+            <li className="flex items-start">
+              <span className="text-4xl mr-4 text-pink-400">📑</span>
+              <div>
+                <h4 className="text-2xl font-semibold funky-font-title text-pink-400">Smart Summaries & Mind Maps</h4>
+                <p className="mt-2 text-gray-300">
+                  Upload your notes in PDF, PPT, or image formats and instantly get concise summaries and visual mind maps powered by AI. No more endless scrolling.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start">
+              <span className="text-4xl mr-4 text-pink-400">🧠</span>
+              <div>
+                <h4 className="text-2xl font-semibold funky-font-title text-pink-400">Personalized Quizzes & Flashcards</h4>
+                <p className="mt-2 text-gray-300">
+                  Turn your study material into personalized quizzes and flashcards in seconds. Practice smarter with auto-generated questions that reinforce key concepts.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start">
+              <span className="text-4xl mr-4 text-pink-400">🤖</span>
+              <div>
+                <h4 className="text-2xl font-semibold funky-font-title text-pink-400">Interactive Q&A Chatbot</h4>
+                <p className="mt-2 text-gray-300">
+                  Stuck on a topic? Ask your doubts directly to our intelligent chatbot trained on your uploaded content and get clear, contextual answers instantly.
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start">
+              <span className="text-4xl mr-4 text-pink-400">📱</span>
+              <div>
+                <h4 className="text-2xl font-semibold funky-font-title text-pink-400">Your Personal Knowledge Vault</h4>
+                <p className="mt-2 text-gray-300">
+                  Save your processed notes, summaries, and quizzes in one place. Organize everything neatly and access your personal knowledge vault whenever you need it.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <h3 className="text-3xl font-bold mt-16 mb-8 text-center funky-font-title">Future Scope</h3>
+        <div className="max-w-4xl text-left text-lg leading-relaxed text-gray-300">
+          <p className="mb-4">
+            We are continuously working to expand MindVault's capabilities. Our upcoming features include:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-left mx-auto max-w-lg">
+            <li>Voice note transcription: Automatically convert your voice memos into searchable text.</li>
+            <li>Chat history: Save your conversations with the AI chatbot for future reference.</li>
+            <li>Collaborative study features: Work on notes and projects with your peers in real-time.</li>
+            <li>AI-powered calendar planning: Get smart suggestions for your study schedule based on your workload and deadlines.</li>
           </ul>
         </div>
       </section>
-
-      {/* Footer from Home page for consistency */}
-      <footer className="bg-[#0d0d0d] text-gray-400 py-6 text-center border-t border-gray-800 mt-10">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} MindVault. All rights reserved.
-        </p>
-        <div className="flex justify-center space-x-6 mt-3 text-sm">
-          <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
-        </div>
-      </footer>
-    </div>
+    </Element>
   );
 };
 
-export default AboutPage;
+export default About;
