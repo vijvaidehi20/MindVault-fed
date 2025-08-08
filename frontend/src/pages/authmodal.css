@@ -6,7 +6,8 @@
   width: 100%;
   height: 100%;
   z-index: 2000;
-  background-image: url('/gif_1.gif');
+  /* Updated to use your new GIF file */
+  background-image: url('C:\Users\DELL\Downloads\FED_PRJ\frontend\public\login-gif.gif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
